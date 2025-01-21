@@ -15,4 +15,6 @@
     <string name="auth_failed">Authentication failed</string>
     <string name="auth_error">Authentication error</string>
 
+    <string name="navigation_drawer_open">Navigation Drawer Open</string>
+    <string name="navigation_drawer_close">Navigation Drawer Close</string>
 </resources>
