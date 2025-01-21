@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_nav_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/navProfile"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="Profile" />
+    <item
+        android:id="@+id/navLms"
+        android:icon="@drawable/ic_nav_lms"
+        android:title="My LMS" />
+    <item
+        android:id="@+id/navShop"
+        android:icon="@drawable/ic_nav_shop"
+        android:title="Shop" />
+
+    <item
+        android:id="@+id/navMore"
+        android:icon="@drawable/ic_nav_more"
+        android:title="More" />
+
+
+
+</menu>

@@ -30,6 +30,9 @@ class Splash : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        startActivity(Intent(this, Home::class.java))
+        finish()
+
         initLayout()
 
         listeners()

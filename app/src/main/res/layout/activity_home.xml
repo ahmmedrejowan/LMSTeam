@@ -44,7 +44,7 @@
                         android:id="@+id/materialToolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="26dp"
                         app:menu="@menu/top_menu"
                         app:navigationIcon="@drawable/ic_menu"
                         app:navigationIconTint="@color/white" />
@@ -90,26 +90,30 @@
         <!--            android:layout_height="match_parent"-->
         <!--            android:layout_marginTop="?attr/actionBarSize" />-->
 
-        <!--        <com.google.android.material.bottomappbar.BottomAppBar-->
-        <!--            android:id="@+id/bottomAppBar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="?attr/actionBarSize"-->
-        <!--            android:layout_gravity="bottom"-->
-        <!--            app:hideOnScroll="true">-->
 
-        <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--                android:id="@+id/bottomNavigation"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                style="@style/Widget.MaterialComponents.BottomNavigationView"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                app:itemIconSize="22dp"-->
-        <!--                app:itemIconTint="@color/bottom_nav_icon"-->
-        <!--                app:itemTextAppearanceActive="@style/UbuntuMediumTextStyle"-->
-        <!--                app:itemTextColor="@color/bottom_nav_icon"-->
-        <!--                app:menu="@menu/bottom_nav_menu" />-->
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/white">
 
-        <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                style="@style/Widget.MaterialComponents.BottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:backgroundTint="@color/white"
+                app:itemIconSize="24dp"
+                app:itemIconTint="@color/bottom_nav_icon"
+                app:itemRippleColor="@null"
+                app:itemTextAppearanceActive="@style/BottomNavTextStyle"
+                app:itemTextAppearanceInactive="@style/BottomNavTextStyle"
+                app:itemTextColor="@color/bottom_nav_icon"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_nav_menu" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
