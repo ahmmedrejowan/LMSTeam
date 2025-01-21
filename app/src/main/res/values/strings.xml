@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">LMS Team Profile</string>
+    <string name="lms_tag">Start Local, Go Global</string>
+    <string name="log_in">LOG IN</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="face">Face</string>
+    <string name="confirm_biometric">Confirm Biometric</string>
+    <string name="scan_your_finger">Scan your Finger</string>
+    <string name="use_face_recognition">Use Face Recognition</string>
+    <string name="fingerprint_icon">Fingerprint Icon</string>
+    <string name="cancel">Cancel</string>
+
+
+    <string name="auth_success">Authentication successful</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="auth_error">Authentication error</string>
+
 </resources>

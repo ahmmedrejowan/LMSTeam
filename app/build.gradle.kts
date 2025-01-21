@@ -61,5 +61,11 @@ dependencies {
     // koin
     implementation(libs.koin.android)
 
+    // lifecycle
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+
+    // biometric
+    implementation("androidx.biometric:biometric-ktx:1.4.0-alpha02")
+
 
 }
