@@ -7,6 +7,8 @@
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textColorHint">@color/textColorSecondary</item>
         <item name="backgroundColor">@color/backgroundColor</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
 

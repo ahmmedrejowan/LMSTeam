@@ -1,5 +1,6 @@
 package com.rejowan.lmsteamprofile.ui.modules.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.rejowan.lmsteamprofile.R
 import com.rejowan.lmsteamprofile.databinding.ActivitySplashBinding
+import com.rejowan.lmsteamprofile.ui.modules.home.Home
 import com.rejowan.lmsteamprofile.utils.auth.AuthCallback
 import com.rejowan.lmsteamprofile.utils.auth.AuthManager
 
@@ -56,6 +58,8 @@ class Splash : AppCompatActivity() {
             override fun onSuccess() {
                 runOnUiThread {
                     Toast.makeText(this@Splash, "Authentication Success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@Splash, Home::class.java))
+                    finish()
                 }
             }
 
