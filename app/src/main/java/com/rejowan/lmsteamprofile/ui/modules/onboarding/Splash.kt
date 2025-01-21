@@ -14,6 +14,8 @@ import com.rejowan.lmsteamprofile.databinding.ActivitySplashBinding
 import com.rejowan.lmsteamprofile.ui.modules.home.Home
 import com.rejowan.lmsteamprofile.utils.auth.AuthCallback
 import com.rejowan.lmsteamprofile.utils.auth.AuthManager
+import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Splash : AppCompatActivity() {
 
@@ -25,10 +27,17 @@ class Splash : AppCompatActivity() {
     private lateinit var authManager: AuthManager
     private val handler = Handler(Looper.getMainLooper())
 
+    private val mainViewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        mainViewModel.getSummary()
+        mainViewModel.getBatters()
+        mainViewModel.getBowlers()
+        mainViewModel.getAllRounders()
 
         startActivity(Intent(this, Home::class.java))
         finish()

@@ -1,21 +1,30 @@
 package com.rejowan.lmsteamprofile
 
 import android.app.Application
-import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.rejowan.lmsteamprofile.ui.modules.onboarding.Splash
+import com.rejowan.lmsteamprofile.di.mainModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class MyApplication : Application() {
 
 
     override fun onCreate() {
         super.onCreate()
+
+
+        startKoin {
+            androidLogger(Level.ERROR)
+            androidContext(this@MyApplication)
+            modules(listOf(mainModule))
+        }
+
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
