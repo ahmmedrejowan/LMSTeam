@@ -11,7 +11,7 @@ interface RetrofitAPI {
 
     // Summary
     @GET("GetWorldTeamProfileSummery?teamId=7027")
-    fun getSummary(): Call<Any>
+    fun getSummary(): Call<List<List<Any>>>
 
     // All-rounder list
     @GET("GetWorldTeamProfile?typeId=4&teamId=7027")

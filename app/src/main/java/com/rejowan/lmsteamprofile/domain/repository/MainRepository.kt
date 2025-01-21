@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import com.rejowan.lmsteamprofile.data.remote.response.AllRoundedResponse
 import com.rejowan.lmsteamprofile.data.remote.response.BatterResponse
 import com.rejowan.lmsteamprofile.data.remote.response.BowlerResponse
+import com.rejowan.lmsteamprofile.data.remote.response.TeamProfileData
 
 interface MainRepository {
+
+    val teamProfileData : LiveData<TeamProfileData>
 
     val battersList: LiveData<MutableList<BatterResponse>>
 

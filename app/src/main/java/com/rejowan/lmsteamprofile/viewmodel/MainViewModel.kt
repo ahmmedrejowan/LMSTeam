@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
 
+    val teamProfileData = repository.teamProfileData
     val battersList = repository.battersList
     val bowlerList = repository.bowlerList
     val allRounderList = repository.allRounderList

@@ -8,7 +8,7 @@
     tools:context=".ui.modules.home.Home"
     tools:openDrawer="end">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,7 +16,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -88,35 +89,28 @@
             layout="@layout/content_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp" />
+            android:layout_above="@id/bottomNavigation"
+            android:layout_below="@id/appBarLayout" />
 
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            style="@style/Widget.MaterialComponents.BottomNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:backgroundTint="@color/white">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigation"
-                style="@style/Widget.MaterialComponents.BottomNavigationView"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:backgroundTint="@color/white"
-                app:itemIconSize="24dp"
-                app:itemIconTint="@color/bottom_nav_icon"
-                app:itemRippleColor="@null"
-                app:itemTextAppearanceActive="@style/BottomNavTextStyle"
-                app:itemTextAppearanceInactive="@style/BottomNavTextStyle"
-                app:itemTextColor="@color/bottom_nav_icon"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_nav_menu" />
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/white"
+            app:itemIconSize="24dp"
+            app:itemIconTint="@color/bottom_nav_icon"
+            app:itemRippleColor="@null"
+            app:itemTextAppearanceActive="@style/BottomNavTextStyle"
+            app:itemTextAppearanceInactive="@style/BottomNavTextStyle"
+            app:itemTextColor="@color/bottom_nav_icon"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu" />
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 
 
     <com.google.android.material.navigation.NavigationView
