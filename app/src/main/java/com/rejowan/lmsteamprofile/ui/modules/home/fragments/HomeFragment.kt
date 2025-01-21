@@ -137,10 +137,9 @@ class HomeFragment : Fragment() {
         )
 
         binding.summaryLayout.scrollSquad.setOnClickListener {
-            val last = allRounderList.size - 1
-            if (last >= 0) {
-                binding.summaryLayout.recyclerViewSquad.scrollToPosition(last)
-            }
+            val last = adapter.itemCount - 1
+            binding.summaryLayout.recyclerViewSquad.smoothScrollToPosition(last)
+
         }
 
         binding.summaryLayout.recyclerViewSquad.addOnScrollListener(object : RecyclerView.OnScrollListener() {
