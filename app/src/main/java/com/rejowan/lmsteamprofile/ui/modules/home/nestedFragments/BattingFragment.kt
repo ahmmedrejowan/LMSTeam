@@ -4,19 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.rejowan.lmsteamprofile.databinding.FragmentOthersBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rejowan.lmsteamprofile.R
+import com.rejowan.lmsteamprofile.data.remote.response.BatterResponse
+import com.rejowan.lmsteamprofile.databinding.FragmentBattingBinding
+import com.rejowan.lmsteamprofile.ui.shared.adapter.BatsmanAdapter
+import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BattingFragment : Fragment() {
 
-    private val binding: FragmentOthersBinding by lazy {
-        FragmentOthersBinding.inflate(layoutInflater)
+    private val binding: FragmentBattingBinding by lazy {
+        FragmentBattingBinding.inflate(layoutInflater)
     }
 
+    private val mainViewModel: MainViewModel by viewModel()
+
+    private val adapter: BatsmanAdapter by lazy {
+        BatsmanAdapter(mutableListOf())
+    }
+
+    private val batterList = mutableListOf<BatterResponse>()
+    private val batterWithoutFormerList = mutableListOf<BatterResponse>()
+
+    private var showFormer = false
+    private var isRunsSortedDesc = true
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return binding.root
     }
@@ -24,7 +45,69 @@ class BattingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.fragmentName.text = "Batting Fragment"
+        Toast.makeText(activity, "Loading Data", Toast.LENGTH_SHORT).show()
+
+        setupAdapter()
+
+        setupFilters()
+
+    }
+
+    private fun setupFilters() {
+
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            showFormer = isChecked
+            if (isChecked) {
+                adapter.updateList(batterList)
+            } else {
+                adapter.updateList(batterWithoutFormerList)
+            }
+        }
+
+        binding.runsSort.setOnClickListener {
+            isRunsSortedDesc = !isRunsSortedDesc
+
+            val sortedList = if (showFormer) {
+                if (isRunsSortedDesc) batterList.sortedByDescending { it.runs }
+                else batterList.sortedBy { it.runs }
+            } else {
+                if (isRunsSortedDesc) batterWithoutFormerList.sortedByDescending { it.runs }
+                else batterWithoutFormerList.sortedBy { it.runs }
+            }
+
+            adapter.updateList(sortedList)
+
+            val sortIconRes = if (isRunsSortedDesc) R.drawable.ic_triangle_up else R.drawable.ic_triangle_down
+            binding.runsSort.setImageResource(sortIconRes)
+        }
+
+
+    }
+
+    private fun setupAdapter() {
+
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
+        binding.recyclerView.setHasFixedSize(true)
+
+
+        mainViewModel.battersList.observe(viewLifecycleOwner) { list ->
+
+            CoroutineScope(Dispatchers.IO).launch {
+                batterList.clear()
+                batterWithoutFormerList.clear()
+                batterList.addAll(list)
+
+                batterWithoutFormerList.addAll(list.filter { it.isFormar == 0 })
+
+                lifecycleScope.launch {
+                    adapter.initList(batterWithoutFormerList)
+                }
+
+            }
+        }
+
+
     }
 
     override fun onResume() {
