@@ -23,5 +23,9 @@ class BallingFragment : Fragment() {
         binding.fragmentName.text = "Balling Fragment"
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 
 }

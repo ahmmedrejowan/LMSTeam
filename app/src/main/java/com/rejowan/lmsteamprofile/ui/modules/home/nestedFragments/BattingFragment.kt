@@ -27,5 +27,9 @@ class BattingFragment : Fragment() {
         binding.fragmentName.text = "Batting Fragment"
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 
 }

@@ -27,5 +27,10 @@ class AllRounderFragment : Fragment() {
         binding.fragmentName.text = "All Rounder Fragment"
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
+
 
 }

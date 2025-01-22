@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
 
     private fun setupViewPager() {
         val fragmentAdapter =
-            SecondFragmentAdapter(requireActivity().supportFragmentManager, lifecycle)
+            SecondFragmentAdapter(childFragmentManager, lifecycle)
         binding.viewPager2.adapter = fragmentAdapter
         binding.viewPager2.isUserInputEnabled = false
 
@@ -57,19 +57,19 @@ class HomeFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab) {
                     summaryTab -> {
-                        binding.viewPager2.currentItem = 0
+                        binding.viewPager2.setCurrentItem(0, false)
                     }
 
                     battingTab -> {
-                        binding.viewPager2.currentItem = 1
+                        binding.viewPager2.setCurrentItem(1, false)
                     }
 
                     ballingTab -> {
-                        binding.viewPager2.currentItem = 2
+                        binding.viewPager2.setCurrentItem(2, false)
                     }
 
                     allRounderTab -> {
-                        binding.viewPager2.currentItem = 3
+                        binding.viewPager2.setCurrentItem(3, false)
                     }
                 }
             }
