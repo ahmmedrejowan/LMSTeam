@@ -28,6 +28,11 @@ import com.rejowan.lmsteamprofile.ui.shared.adapter.SquadPlayerAdapter
 import com.rejowan.lmsteamprofile.ui.shared.adapter.TopPlayerAdapter
 import com.rejowan.lmsteamprofile.ui.shared.adapter.UpcomingFixturesAdapter
 import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -52,13 +57,60 @@ class HomeFragment : Fragment() {
             setupTeamInfo(profileData.teamInfo)
             setupSummaryStats(profileData.summaryStats)
             setupRanking(profileData.rankings)
-            setupTopBatsman(profileData.topBatsmen)
-            setupTopBowler(profileData.topBowlers)
-            setupTopAllRounder(profileData.topAllRounders)
-            setupAwards(profileData.awards)
-            setupMatchResults(profileData.matchResults)
-            setupUpcomingFixtures(profileData.upcomingFixtures)
-            setupVideos(profileData.videos)
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupTopBatsman(profileData.topBatsmen)
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupTopBowler(profileData.topBowlers)
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupTopAllRounder(profileData.topAllRounders)
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupAwards(profileData.awards)
+
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupMatchResults(profileData.matchResults)
+
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupUpcomingFixtures(profileData.upcomingFixtures)
+
+                }
+            }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                delay(100)
+                withContext(Dispatchers.Main) {
+                    setupVideos(profileData.videos)
+
+                }
+            }
+
         }
 
         mainViewModel.allRounderList.observe(viewLifecycleOwner) { allRounderList ->
