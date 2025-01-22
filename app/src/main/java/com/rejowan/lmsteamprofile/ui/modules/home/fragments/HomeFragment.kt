@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
             setupTopBatsman(profileData.topBatsmen)
             setupTopBowler(profileData.topBowlers)
             setupTopAllRounder(profileData.topAllRounders)
+
         }
 
         mainViewModel.allRounderList.observe(viewLifecycleOwner) { allRounderList ->

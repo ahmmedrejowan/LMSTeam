@@ -55,7 +55,7 @@ data class Awards(
 data class MatchResult(
     @SerializedName("TeamId") val teamId: Int,
     @SerializedName("TeamName") val teamName: String,
-    @SerializedName("TeamLogo") val teamLogo: String,
+    @SerializedName("TeamLogo") val teamLogo: String?,
     @SerializedName("oppoTeamId") val oppoTeamId: Int,
     @SerializedName("oppTeamName") val oppTeamName: String,
     @SerializedName("oppLogo") val oppLogo: String?,
@@ -66,7 +66,7 @@ data class MatchResult(
 data class UpcomingFixture(
     @SerializedName("TeamId") val teamId: Int,
     @SerializedName("TeamName") val teamName: String,
-    @SerializedName("TeamLogo") val teamLogo: String,
+    @SerializedName("TeamLogo") val teamLogo: String?,
     @SerializedName("oppoTeamId") val oppoTeamId: Int,
     @SerializedName("oppTeamName") val oppTeamName: String,
     @SerializedName("oppLogo") val oppLogo: String?,
