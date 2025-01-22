@@ -29,13 +29,12 @@
 
 
         <TextView
-            android:id="@+id/inngs"
+            android:id="@+id/overs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
@@ -44,14 +43,13 @@
 
 
         <TextView
-            android:id="@+id/runs"
+            android:id="@+id/wkts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1.5"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
-            android:maxLines="1"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:textColor="@color/textColor"
@@ -63,9 +61,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
@@ -74,13 +71,12 @@
 
 
         <TextView
-            android:id="@+id/sr"
+            android:id="@+id/eco"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
@@ -89,12 +85,11 @@
 
 
         <TextView
-            android:id="@+id/hs"
+            android:id="@+id/best"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
@@ -104,12 +99,11 @@
 
 
         <TextView
-            android:id="@+id/fifties"
+            android:id="@+id/threefa"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
@@ -125,7 +119,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
@@ -138,7 +131,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
