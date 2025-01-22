@@ -46,10 +46,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="1000"
                     android:textColor="#008977"
                     android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="1000" />
 
 
             </LinearLayout>
@@ -93,19 +93,19 @@
                         android:id="@+id/winRatio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="50"
                         android:textColor="#008977"
                         android:textSize="48sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="50" />
 
                     <TextView
                         android:id="@+id/winRatioPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=".54%"
                         android:textColor="#008977"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text=".54%" />
 
                 </LinearLayout>
 
@@ -146,10 +146,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="505"
                     android:textColor="#008977"
                     android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="505" />
 
 
             </LinearLayout>
@@ -188,10 +188,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="450"
                     android:textColor="#008977"
                     android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="450" />
 
 
             </LinearLayout>
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="1000"
+                    tools:text="1000"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -279,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="1000"
+                    tools:text="1000"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -319,7 +319,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="1000"
+                    tools:text="1000"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -359,7 +359,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="W W L L W"
+                    tools:text="W W L L W"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -1009,7 +1009,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="3"
+                    tools:text="3"
                     android:textColor="@color/textColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -1045,7 +1045,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="3"
+                    tools:text="3"
                     android:textColor="@color/textColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />
