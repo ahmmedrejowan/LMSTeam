@@ -21,7 +21,8 @@ data class TeamProfileData(
 data class TeamInfo(
     @SerializedName("TeamName") val teamName: String,
     @SerializedName("TeamLogo") val teamLogo: String,
-    @SerializedName("SponsorLogo") val sponsorLogo: String
+    @SerializedName("SponsorLogo") val sponsorLogo: String,
+    @SerializedName("TeamDescription") val teamDescription: String
 )
 
 data class SummaryStats(

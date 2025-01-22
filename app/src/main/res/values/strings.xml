@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LMS Team Profile</string>
+    <string name="app_name">LMS</string>
     <string name="lms_tag">Start Local, Go Global</string>
     <string name="log_in">LOG IN</string>
     <string name="fingerprint">Fingerprint</string>

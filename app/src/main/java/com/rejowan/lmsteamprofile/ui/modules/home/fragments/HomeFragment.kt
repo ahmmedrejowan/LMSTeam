@@ -75,6 +75,7 @@ class HomeFragment : Fragment() {
 
         Glide.with(requireContext()).load(teamInfo[0].sponsorLogo).into(binding.sponsorLogo)
 
+        binding.summaryLayout.description.text = teamInfo[0].teamDescription
 
     }
 
