@@ -34,7 +34,7 @@ class BattingFragment : Fragment() {
     private val batterWithoutFormerList = mutableListOf<BatterResponse>()
 
     private var showFormer = false
-    private var isRunsSortedDesc = true
+    private var isRunsSortedDesc = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -56,16 +56,16 @@ class BattingFragment : Fragment() {
     private fun setupFilters() {
 
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            showFormer = isChecked
             if (isChecked) {
                 adapter.updateList(batterList)
             } else {
                 adapter.updateList(batterWithoutFormerList)
             }
+            showFormer = isChecked
+
         }
 
         binding.runsSort.setOnClickListener {
-            isRunsSortedDesc = !isRunsSortedDesc
 
             val sortedList = if (showFormer) {
                 if (isRunsSortedDesc) batterList.sortedByDescending { it.runs }
@@ -77,8 +77,10 @@ class BattingFragment : Fragment() {
 
             adapter.updateList(sortedList)
 
-            val sortIconRes = if (isRunsSortedDesc) R.drawable.ic_triangle_up else R.drawable.ic_triangle_down
+            val sortIconRes = if (isRunsSortedDesc) R.drawable.ic_triangle_down else R.drawable.ic_triangle_up
             binding.runsSort.setImageResource(sortIconRes)
+            isRunsSortedDesc = !isRunsSortedDesc
+
         }
 
 

@@ -34,6 +34,8 @@ class BatsmanAdapter(private val list: MutableList<BatterResponse> = mutableList
 
         if (item.isFormar == 1) {
             holder.binding.linearLayout.setBackgroundColor(Color.parseColor("#D0AEAE"))
+        } else {
+            holder.binding.linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"))
         }
 
     }
