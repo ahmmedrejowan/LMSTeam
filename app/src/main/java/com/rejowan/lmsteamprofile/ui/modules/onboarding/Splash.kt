@@ -39,9 +39,6 @@ class Splash : AppCompatActivity() {
         mainViewModel.getBowlers()
         mainViewModel.getAllRounders()
 
-        startActivity(Intent(this, Home::class.java))
-        finish()
-
         initLayout()
 
         listeners()
@@ -69,7 +66,6 @@ class Splash : AppCompatActivity() {
         authManager = AuthManager(this, object : AuthCallback {
             override fun onSuccess() {
                 runOnUiThread {
-                    Toast.makeText(this@Splash, "Authentication Success", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@Splash, Home::class.java))
                     finish()
                 }
@@ -147,7 +143,7 @@ class Splash : AppCompatActivity() {
         // with a delay 1 sec, prompt the fingerprint dialog
         handler.postDelayed({
             authManager.authenticate()
-        }, 1000)
+        }, 500)
 
         // imgFingerprint can also be clicked to prompt the fingerprint dialog
         binding.imgFingerprint.setOnClickListener {
@@ -166,7 +162,7 @@ class Splash : AppCompatActivity() {
         // with a delay 1 sec, prompt the face dialog
         handler.postDelayed({
             authManager.authenticate()
-        }, 1000)
+        }, 500)
 
         // textCancelFace can cancel the face dialog
         binding.textCancelFace.setOnClickListener {

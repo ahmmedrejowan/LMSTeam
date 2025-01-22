@@ -9,11 +9,12 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.rejowan.lmsteamprofile.data.remote.response.TeamInfo
 import com.rejowan.lmsteamprofile.databinding.FragmentHomeBinding
+import com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments.SummaryFragment
 import com.rejowan.lmsteamprofile.ui.shared.adapter.SecondFragmentAdapter
 import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SummaryFragment.PageSwitcher {
 
     private val binding: FragmentHomeBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
@@ -92,6 +93,11 @@ class HomeFragment : Fragment() {
         Glide.with(requireContext()).load(teamInfo[0].sponsorLogo).into(binding.sponsorLogo)
 
 
+    }
+
+    override fun switchPageInParent(pageIndex: Int) {
+        binding.viewPager2.setCurrentItem(pageIndex, false)
+        binding.tabLayout.getTabAt(pageIndex)?.select()
     }
 
 

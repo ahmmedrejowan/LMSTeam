@@ -1,5 +1,6 @@
 package com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -12,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.rejowan.lmsteamprofile.data.remote.response.AllRoundedResponse
 import com.rejowan.lmsteamprofile.data.remote.response.Awards
 import com.rejowan.lmsteamprofile.data.remote.response.MatchResult
@@ -22,7 +22,6 @@ import com.rejowan.lmsteamprofile.data.remote.response.SummaryStats
 import com.rejowan.lmsteamprofile.data.remote.response.TeamInfo
 import com.rejowan.lmsteamprofile.data.remote.response.UpcomingFixture
 import com.rejowan.lmsteamprofile.data.remote.response.Video
-import com.rejowan.lmsteamprofile.databinding.FragmentOthersBinding
 import com.rejowan.lmsteamprofile.databinding.FragmentSummaryBinding
 import com.rejowan.lmsteamprofile.ui.shared.adapter.RecentResultsAdapter
 import com.rejowan.lmsteamprofile.ui.shared.adapter.RecentVideoAdapter
@@ -35,6 +34,12 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SummaryFragment : Fragment() {
+
+    private var pageSwitcher: PageSwitcher? = null
+
+    interface PageSwitcher {
+        fun switchPageInParent(pageIndex: Int)
+    }
 
     private val binding: FragmentSummaryBinding by lazy {
         FragmentSummaryBinding.inflate(layoutInflater)
@@ -54,7 +59,7 @@ class SummaryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         mainViewModel.teamProfileData.observe(viewLifecycleOwner) { profileData ->
             setupTeamInfo(profileData.teamInfo)
             setupSummaryStats(profileData.summaryStats)
@@ -77,9 +82,21 @@ class SummaryFragment : Fragment() {
             setupSquad(allRounderList)
         }
 
-        
+        clickListeners()
+
     }
 
+    private fun clickListeners() {
+
+        binding.seeFullBowler.setOnClickListener {
+            switchToPage(2)
+        }
+
+        binding.seeFullBatsman.setOnClickListener {
+            switchToPage(1)
+        }
+
+    }
 
 
     private fun setupTeamInfo(teamInfo: List<TeamInfo>) {
@@ -113,10 +130,7 @@ class SummaryFragment : Fragment() {
             val color = if (formItem == "W") Color.GREEN else Color.RED
 
             spannableString.setSpan(
-                ForegroundColorSpan(color),
-                start,
-                spannableString.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                ForegroundColorSpan(color), start, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
             spannableString.append(" ")
@@ -166,8 +180,7 @@ class SummaryFragment : Fragment() {
 
         }
 
-        binding.recyclerViewSquad.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
+        binding.recyclerViewSquad.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
@@ -214,6 +227,24 @@ class SummaryFragment : Fragment() {
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (parentFragment is PageSwitcher) {
+            pageSwitcher = parentFragment as PageSwitcher
+        } else {
+            throw IllegalStateException("Parent fragment must implement PageSwitcher")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        pageSwitcher = null
+    }
+
+    private fun switchToPage(pageIndex: Int) {
+        pageSwitcher?.switchPageInParent(pageIndex)
     }
 
 
