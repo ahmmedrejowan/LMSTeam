@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.rejowan.lmsteamprofile.ui.modules.home.fragments.HomeFragment">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -175,13 +175,11 @@
             app:drawableStartCompat="@drawable/ic_swipe_left" />
 
 
-        <include
-            android:id="@+id/summaryLayout"
-            layout="@layout/layout_summary"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        />
-
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 

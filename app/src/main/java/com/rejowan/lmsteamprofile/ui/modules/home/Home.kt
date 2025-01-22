@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.material.tabs.TabLayout
 import com.rejowan.lmsteamprofile.R
 import com.rejowan.lmsteamprofile.databinding.ActivityHomeBinding
 import com.rejowan.lmsteamprofile.ui.shared.adapter.FragmentAdapter
@@ -37,14 +38,16 @@ class Home : AppCompatActivity() {
 
         setupBottomNavigation()
 
+        setupTab()
+
         backPressHandler()
 
     }
 
     private fun setupWindow() {
         window.statusBarColor = Color.TRANSPARENT
-        window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+        window?.decorView?.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
     private fun setToolbar() {
@@ -73,6 +76,36 @@ class Home : AppCompatActivity() {
 
     }
 
+    private fun setupTab() {
+
+
+        val featuredTab = binding.tabLayout.getTabAt(0)
+        val proTab = binding.tabLayout.getTabAt(1)
+        featuredTab?.select()
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab) {
+                    featuredTab -> {
+                        binding.contentLayout.viewPager.setCurrentItem(0, false)
+                    }
+
+                    proTab -> {
+                        binding.contentLayout.viewPager.setCurrentItem(5, false)
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+        })
+
+    }
+
     private fun setupMenu() {
         binding.materialToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -96,7 +129,11 @@ class Home : AppCompatActivity() {
     private fun setupBottomNavigation() {
 
         val fragmentPositionMap = mapOf(
-            R.id.navHome to 0, R.id.navProfile to 1, R.id.navLms to 2, R.id.navShop to 3, R.id.navMore to 4
+            R.id.navHome to 0,
+            R.id.navProfile to 1,
+            R.id.navLms to 2,
+            R.id.navShop to 3,
+            R.id.navMore to 4
         )
 
         val fragmentAdapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -120,7 +157,19 @@ class Home : AppCompatActivity() {
         binding.contentLayout.viewPager.registerOnPageChangeCallback(object :
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                binding.bottomNavigation.menu.getItem(position).isChecked = true
+                if (position < 5) {
+                    binding.bottomNavigation.menu.getItem(position).isChecked = true
+                }
+                if (position == 0 || position == 5) {
+                    binding.tabLayout.visibility = View.VISIBLE
+                    if (position == 0) {
+                        binding.tabLayout.getTabAt(0)?.select()
+                    } else {
+                        binding.tabLayout.getTabAt(1)?.select()
+                    }
+                } else {
+                    binding.tabLayout.visibility = View.GONE
+                }
             }
         })
 

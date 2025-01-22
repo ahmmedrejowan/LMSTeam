@@ -10,41 +10,37 @@ import com.rejowan.lmsteamprofile.ui.modules.home.fragments.MyLmsFragment
 import com.rejowan.lmsteamprofile.ui.modules.home.fragments.ProFragment
 import com.rejowan.lmsteamprofile.ui.modules.home.fragments.ProfileFragment
 import com.rejowan.lmsteamprofile.ui.modules.home.fragments.ShopFragment
+import com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments.AllRounderFragment
+import com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments.BallingFragment
+import com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments.BattingFragment
+import com.rejowan.lmsteamprofile.ui.modules.home.nestedFragments.SummaryFragment
 
-class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class SecondFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
-        return 6
+        return 4
     }
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
-                HomeFragment()
+                SummaryFragment()
             }
 
             1 -> {
-                ProfileFragment()
+                BattingFragment()
             }
 
             2 -> {
-                MyLmsFragment()
+                BallingFragment()
             }
 
             3 -> {
-                ShopFragment()
-            }
-
-            4 -> {
-                MoreFragment()
-            }
-
-            5 -> {
-                ProFragment()
+                AllRounderFragment()
             }
 
             else -> {
-                HomeFragment()
+                SummaryFragment()
             }
         }
 
