@@ -13,13 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rejowan.lmsteamprofile.data.remote.response.AllRoundedResponse
+import com.rejowan.lmsteamprofile.data.remote.response.Awards
+import com.rejowan.lmsteamprofile.data.remote.response.MatchResult
 import com.rejowan.lmsteamprofile.data.remote.response.Player
 import com.rejowan.lmsteamprofile.data.remote.response.Rankings
 import com.rejowan.lmsteamprofile.data.remote.response.SummaryStats
 import com.rejowan.lmsteamprofile.data.remote.response.TeamInfo
+import com.rejowan.lmsteamprofile.data.remote.response.UpcomingFixture
+import com.rejowan.lmsteamprofile.data.remote.response.Video
 import com.rejowan.lmsteamprofile.databinding.FragmentHomeBinding
+import com.rejowan.lmsteamprofile.ui.shared.adapter.RecentResultsAdapter
+import com.rejowan.lmsteamprofile.ui.shared.adapter.RecentVideoAdapter
 import com.rejowan.lmsteamprofile.ui.shared.adapter.SquadPlayerAdapter
 import com.rejowan.lmsteamprofile.ui.shared.adapter.TopPlayerAdapter
+import com.rejowan.lmsteamprofile.ui.shared.adapter.UpcomingFixturesAdapter
 import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +38,9 @@ class HomeFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         return binding.root
     }
 
@@ -46,7 +55,10 @@ class HomeFragment : Fragment() {
             setupTopBatsman(profileData.topBatsmen)
             setupTopBowler(profileData.topBowlers)
             setupTopAllRounder(profileData.topAllRounders)
-
+            setupAwards(profileData.awards)
+            setupMatchResults(profileData.matchResults)
+            setupUpcomingFixtures(profileData.upcomingFixtures)
+            setupVideos(profileData.videos)
         }
 
         mainViewModel.allRounderList.observe(viewLifecycleOwner) { allRounderList ->
@@ -93,7 +105,10 @@ class HomeFragment : Fragment() {
             val color = if (formItem == "W") Color.GREEN else Color.RED
 
             spannableString.setSpan(
-                ForegroundColorSpan(color), start, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                ForegroundColorSpan(color),
+                start,
+                spannableString.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
             spannableString.append(" ")
@@ -143,7 +158,8 @@ class HomeFragment : Fragment() {
 
         }
 
-        binding.summaryLayout.recyclerViewSquad.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.summaryLayout.recyclerViewSquad.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
@@ -158,6 +174,37 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+
+    }
+
+    private fun setupAwards(awards: List<Awards>) {
+        binding.summaryLayout.champions.text = awards[0].champion.toString()
+        binding.summaryLayout.runersUp.text = awards[0].runnersUp.toString()
+    }
+
+    private fun setupMatchResults(matchResults: List<MatchResult>) {
+        val adapter = RecentResultsAdapter(matchResults.take(5))
+        binding.summaryLayout.recyclerViewRecentResults.adapter = adapter
+        binding.summaryLayout.recyclerViewRecentResults.layoutManager = LinearLayoutManager(
+            requireContext(), LinearLayoutManager.VERTICAL, false
+        )
+
+    }
+
+    private fun setupUpcomingFixtures(upcomingFixtures: List<UpcomingFixture>) {
+        val adapter = UpcomingFixturesAdapter(upcomingFixtures.take(5))
+        binding.summaryLayout.recyclerViewUpcomingFixtures.adapter = adapter
+        binding.summaryLayout.recyclerViewUpcomingFixtures.layoutManager = LinearLayoutManager(
+            requireContext(), LinearLayoutManager.VERTICAL, false
+        )
+    }
+
+    private fun setupVideos(videos: List<Video>) {
+        val adapter = RecentVideoAdapter(videos.take(3))
+        binding.summaryLayout.recyclerViewVideos.adapter = adapter
+        binding.summaryLayout.recyclerViewVideos.layoutManager = LinearLayoutManager(
+            requireContext(), LinearLayoutManager.VERTICAL, false
+        )
 
     }
 
