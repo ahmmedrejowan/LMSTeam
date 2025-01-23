@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.rejowan.lmsteamprofile.R
 import com.rejowan.lmsteamprofile.databinding.ActivitySplashBinding
 import com.rejowan.lmsteamprofile.ui.modules.home.Home
+import com.rejowan.lmsteamprofile.utils.SessionManager
 import com.rejowan.lmsteamprofile.utils.auth.AuthCallback
 import com.rejowan.lmsteamprofile.utils.auth.AuthManager
 import com.rejowan.lmsteamprofile.viewmodel.MainViewModel
@@ -29,6 +30,8 @@ class Splash : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()
 
+    private val sessionManager by lazy { SessionManager(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,9 +42,15 @@ class Splash : AppCompatActivity() {
         mainViewModel.getBowlers()
         mainViewModel.getAllRounders()
 
+        if (sessionManager.isLoggedIn() && !sessionManager.checkInactivity()) {
+            startActivity(Intent(this, Home::class.java))
+            finish()
+        }
+
         initLayout()
 
         listeners()
+
 
     }
 
@@ -65,6 +74,7 @@ class Splash : AppCompatActivity() {
 
         authManager = AuthManager(this, object : AuthCallback {
             override fun onSuccess() {
+                sessionManager.setLoggedIn(true)
                 runOnUiThread {
                     startActivity(Intent(this@Splash, Home::class.java))
                     finish()

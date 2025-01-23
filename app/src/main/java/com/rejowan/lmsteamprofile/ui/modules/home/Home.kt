@@ -1,11 +1,15 @@
 package com.rejowan.lmsteamprofile.ui.modules.home
 
+import android.app.Dialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +17,10 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.rejowan.lmsteamprofile.R
 import com.rejowan.lmsteamprofile.databinding.ActivityHomeBinding
+import com.rejowan.lmsteamprofile.databinding.DialogLogoutBinding
+import com.rejowan.lmsteamprofile.ui.modules.onboarding.Splash
 import com.rejowan.lmsteamprofile.ui.shared.adapter.FragmentAdapter
+import com.rejowan.lmsteamprofile.utils.SessionManager
 
 
 class Home : AppCompatActivity() {
@@ -23,6 +30,10 @@ class Home : AppCompatActivity() {
     }
 
     private var backPressedTime: Long = 0
+
+    val sessionManager by lazy {
+        SessionManager(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +57,7 @@ class Home : AppCompatActivity() {
 
     private fun setupWindow() {
         window.statusBarColor = Color.TRANSPARENT
-        window?.decorView?.systemUiVisibility =
-            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+        window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
     private fun setToolbar() {
@@ -118,7 +128,33 @@ class Home : AppCompatActivity() {
                 }
 
                 R.id.top_logout -> {
-                    Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+
+                    val dialog = Dialog(this)
+                    val dialogBinding: DialogLogoutBinding = DialogLogoutBinding.inflate(
+                        LayoutInflater.from(this)
+                    )
+                    dialog.setContentView(dialogBinding.root)
+                    dialog.setCancelable(true)
+                    dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.window!!.setLayout(
+                        FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    dialogBinding.cancel.setOnClickListener {
+                        dialog.dismiss()
+                    }
+
+                    dialogBinding.logout.setOnClickListener {
+                        dialog.dismiss()
+                        sessionManager.setLoggedIn(false)
+                        startActivity(Intent(this, Splash::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        })
+                        finish()
+                    }
+
+                    dialog.show()
+
                 }
             }
             true
@@ -129,11 +165,7 @@ class Home : AppCompatActivity() {
     private fun setupBottomNavigation() {
 
         val fragmentPositionMap = mapOf(
-            R.id.navHome to 0,
-            R.id.navProfile to 1,
-            R.id.navLms to 2,
-            R.id.navShop to 3,
-            R.id.navMore to 4
+            R.id.navHome to 0, R.id.navProfile to 1, R.id.navLms to 2, R.id.navShop to 3, R.id.navMore to 4
         )
 
         val fragmentAdapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -154,8 +186,7 @@ class Home : AppCompatActivity() {
             true
         }
 
-        binding.contentLayout.viewPager.registerOnPageChangeCallback(object :
-            OnPageChangeCallback() {
+        binding.contentLayout.viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 if (position < 5) {
                     binding.bottomNavigation.menu.getItem(position).isChecked = true
