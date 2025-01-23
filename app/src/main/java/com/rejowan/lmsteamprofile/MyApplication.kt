@@ -60,6 +60,9 @@ class MyApplication : Application() {
 
 
     private fun moveToSplashScreen() {
+        if (isRunningTest()) {
+            return // Skip splash screen redirection during tests
+        }
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(
                 Intent(this, Splash::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -67,5 +70,8 @@ class MyApplication : Application() {
         }, 100)
     }
 
+    private fun isRunningTest(): Boolean {
+        return "true" == System.getProperty("is_test")
+    }
 }
 
