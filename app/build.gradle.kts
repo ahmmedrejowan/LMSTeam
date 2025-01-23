@@ -47,6 +47,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation (libs.koin.test)
+    testImplementation (libs.koin.test.junit4)
+
 
     // retrofit
     implementation(libs.retrofit)
@@ -63,10 +69,10 @@ dependencies {
     implementation(libs.koin.android)
 
     // lifecycle
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation(libs.androidx.lifecycle.extensions)
 
     // biometric
-    implementation("androidx.biometric:biometric-ktx:1.4.0-alpha02")
+    implementation(libs.androidx.biometric.ktx)
 
 
 }
