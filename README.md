@@ -18,4 +18,4 @@
 
 ### Download APK
 
-You can download the signed apk from here - [Download APK](/files/LMS Team - Rejowan.apk)
+You can download the signed apk from here - [Download APK](https://github.com/ahmmedrejowan/TeamProfile/tree/master/files)
