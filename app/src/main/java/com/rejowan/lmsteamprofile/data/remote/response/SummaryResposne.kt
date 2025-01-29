@@ -19,75 +19,75 @@ data class TeamProfileData(
 
 
 data class TeamInfo(
-    @SerializedName("TeamName") val teamName: String,
-    @SerializedName("TeamLogo") val teamLogo: String,
-    @SerializedName("SponsorLogo") val sponsorLogo: String,
-    @SerializedName("TeamDescription") val teamDescription: String
+    @SerializedName("TeamName") val teamName: String?,
+    @SerializedName("TeamLogo") val teamLogo: String?,
+    @SerializedName("SponsorLogo") val sponsorLogo: String?,
+    @SerializedName("TeamDescription") val teamDescription: String?
 )
 
 data class SummaryStats(
-    @SerializedName("gamesPlayed") val gamesPlayed: Int,
-    @SerializedName("WinRatio") val winRatio: Double,
-    @SerializedName("Wins") val wins: Int,
-    @SerializedName("Loses") val loses: Int
+    @SerializedName("gamesPlayed") val gamesPlayed: Int?,
+    @SerializedName("WinRatio") val winRatio: Double?,
+    @SerializedName("Wins") val wins: Int?,
+    @SerializedName("Loses") val loses: Int?
 )
 
 data class Rankings(
-    @SerializedName("WorldRank") val worldRank: Int,
-    @SerializedName("CountryRank") val countryRank: Int,
-    @SerializedName("RegionalRank") val regionalRank: Int,
-    @SerializedName("Form") val form: String
+    @SerializedName("WorldRank") val worldRank: Int?,
+    @SerializedName("CountryRank") val countryRank: Int?,
+    @SerializedName("RegionalRank") val regionalRank: Int?,
+    @SerializedName("Form") val form: String?
 )
 
 data class Player(
-    @SerializedName("UserId") val userId: Int,
-    @SerializedName("FirstName") val firstName: String,
-    @SerializedName("LastName") val lastName: String,
-    @SerializedName("Nationality") val nationality: Int,
-    @SerializedName("UserPicture") val userPicture: String,
-    @SerializedName("WorldRank") val worldRank: Int,
-    @SerializedName("NationalRank") val nationalRank: Int
+    @SerializedName("UserId") val userId: Int?,
+    @SerializedName("FirstName") val firstName: String?,
+    @SerializedName("LastName") val lastName: String?,
+    @SerializedName("Nationality") val nationality: Int?,
+    @SerializedName("UserPicture") val userPicture: String?,
+    @SerializedName("WorldRank") val worldRank: Int?,
+    @SerializedName("NationalRank") val nationalRank: Int?
 )
 
 
 
 data class Awards(
-    @SerializedName("Champion") val champion: Int,
-    @SerializedName("RunnersUp") val runnersUp: Int
+    @SerializedName("Champion") val champion: Int?,
+    @SerializedName("RunnersUp") val runnersUp: Int?
 )
 
 data class MatchResult(
-    @SerializedName("TeamId") val teamId: Int,
-    @SerializedName("TeamName") val teamName: String,
+    @SerializedName("TeamId") val teamId: Int?,
+    @SerializedName("TeamName") val teamName: String?,
     @SerializedName("TeamLogo") val teamLogo: String?,
-    @SerializedName("oppoTeamId") val oppoTeamId: Int,
-    @SerializedName("oppTeamName") val oppTeamName: String,
+    @SerializedName("oppoTeamId") val oppoTeamId: Int?,
+    @SerializedName("oppTeamName") val oppTeamName: String?,
     @SerializedName("oppLogo") val oppLogo: String?,
-    @SerializedName("MatchInfo") val matchInfo: String,
-    @SerializedName("DateTime") val dateTime: String
+    @SerializedName("MatchInfo") val matchInfo: String?,
+    @SerializedName("DateTime") val dateTime: String?
 )
 
 data class UpcomingFixture(
-    @SerializedName("TeamId") val teamId: Int,
-    @SerializedName("TeamName") val teamName: String,
+    @SerializedName("TeamId") val teamId: Int?,
+    @SerializedName("TeamName") val teamName: String?,
     @SerializedName("TeamLogo") val teamLogo: String?,
-    @SerializedName("oppoTeamId") val oppoTeamId: Int,
-    @SerializedName("oppTeamName") val oppTeamName: String,
+    @SerializedName("oppoTeamId") val oppoTeamId: Int?,
+    @SerializedName("oppTeamName") val oppTeamName: String?,
     @SerializedName("oppLogo") val oppLogo: String?,
-    @SerializedName("DateTime") val dateTime: String
+    @SerializedName("DateTime") val dateTime: String?
 )
 
 data class Video(
-    @SerializedName("TeamFixture") val teamFixture: Int,
-    @SerializedName("Date") val date: String,
-    @SerializedName("PlaybackUrl") val playbackUrl: String,
-    @SerializedName("YouTube") val youtube: String,
-    @SerializedName("FixDate") val fixDate: String,
-    @SerializedName("TeamId") val teamId: Int
+    @SerializedName("TeamFixture") val teamFixture: Int?,
+    @SerializedName("Date") val date: String?,
+    @SerializedName("PlaybackUrl") val playbackUrl: String?,
+    @SerializedName("YouTube") val youtube: String?,
+    @SerializedName("FixDate") val fixDate: String?,
+    @SerializedName("TeamId") val teamId: Int?
 )
 
 data class Honor(
-    @SerializedName("Tournament") val tournament: String,
-    @SerializedName("Position") val position: String,
-    @SerializedName("WinnigYear") val winningYear: Int
+    @SerializedName("Tournament") val tournament: String?,
+    @SerializedName("Position") val position: String?,
+    @SerializedName("WinnigYear") val winningYear: Int?
 )

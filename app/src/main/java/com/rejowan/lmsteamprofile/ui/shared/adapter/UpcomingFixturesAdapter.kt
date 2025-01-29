@@ -18,8 +18,7 @@ class UpcomingFixturesAdapter(private val list: List<UpcomingFixture>) :
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): UpcomingFixturesAdapter.MatchViewHolder {
-        val binding =
-            ItemSingleMatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSingleMatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MatchViewHolder(binding)
     }
 
@@ -30,24 +29,27 @@ class UpcomingFixturesAdapter(private val list: List<UpcomingFixture>) :
         holder.binding.teamTwoName.text = result.oppTeamName
 
         result.teamLogo?.let {
-            Glide.with(holder.binding.root.context).load(it)
-                .placeholder(R.drawable.img_placeholder_portrait)
+            Glide.with(holder.binding.root.context).load(it).placeholder(R.drawable.img_placeholder_portrait)
                 .error(R.drawable.img_placeholder_portrait).into(holder.binding.teamOneImage)
         }
 
         result.oppLogo?.let {
-            Glide.with(holder.binding.root.context).load(it)
-                .placeholder(R.drawable.img_placeholder_portrait)
+            Glide.with(holder.binding.root.context).load(it).placeholder(R.drawable.img_placeholder_portrait)
                 .error(R.drawable.img_placeholder_portrait).into(holder.binding.teamTwoImage)
         }
 
         try {
+
             val initDate = result.dateTime
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("'Day' dd MMMM yyyy", Locale.getDefault())
-            val date: Date? = inputFormat.parse(initDate)
-            val formattedDate = outputFormat.format(date!!)
-            holder.binding.date.text = formattedDate
+
+            initDate?.let { iDate ->
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val date: Date? = inputFormat.parse(iDate)
+                val formattedDate = outputFormat.format(date!!)
+                holder.binding.date.text = formattedDate
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -63,7 +65,6 @@ class UpcomingFixturesAdapter(private val list: List<UpcomingFixture>) :
     }
 
 
-    inner class MatchViewHolder(val binding: ItemSingleMatchBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class MatchViewHolder(val binding: ItemSingleMatchBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

@@ -24,22 +24,31 @@ class RecentVideoAdapter(private val list: List<Video>) : RecyclerView.Adapter<R
     override fun onBindViewHolder(holder: RecentVideoAdapter.VideoViewHolder, position: Int) {
         val result = list[position]
 
-        val title = extractTitle(result.playbackUrl)
-        holder.binding.headline.text = title
+        result.playbackUrl?.let { pUrl ->
+            val title = extractTitle(pUrl)
+            holder.binding.headline.text = title
+        }
 
-        val youtubeId = result.youtube.split("/").last()
-        val youtubeThumbnail = "https://img.youtube.com/vi/$youtubeId/0.jpg"
+        result.youtube?.let { yt ->
 
-        Glide.with(holder.binding.root.context).load(youtubeThumbnail).placeholder(R.drawable.img_placeholder_portrait)
-            .error(R.drawable.img_placeholder_portrait).into(holder.binding.newsImage)
+            val youtubeId = yt.split("/").last()
+            val youtubeThumbnail = "https://img.youtube.com/vi/$youtubeId/0.jpg"
+
+            Glide.with(holder.binding.root.context).load(youtubeThumbnail).placeholder(R.drawable.img_placeholder_portrait)
+                .error(R.drawable.img_placeholder_portrait).into(holder.binding.newsImage)
+        }
 
         try {
             val initDate = result.fixDate
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val date: Date? = inputFormat.parse(initDate)
-            val formattedDate = outputFormat.format(date!!)
-            holder.binding.date.text = formattedDate
+
+            initDate?.let { iDate ->
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val date: Date? = inputFormat.parse(iDate)
+                val formattedDate = outputFormat.format(date!!)
+                holder.binding.date.text = formattedDate
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -47,7 +56,7 @@ class RecentVideoAdapter(private val list: List<Video>) : RecyclerView.Adapter<R
         holder.binding.share.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "Watch : $title \n\n${result.youtube}")
+                putExtra(Intent.EXTRA_TEXT, "Watch : ${extractTitle(result.playbackUrl.toString())} \n\n${result.youtube}")
                 type = "text/plain"
             }
             holder.binding.root.context.startActivity(Intent.createChooser(sendIntent, "Share"))

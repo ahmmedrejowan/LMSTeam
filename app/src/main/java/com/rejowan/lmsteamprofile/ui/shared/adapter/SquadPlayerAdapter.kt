@@ -23,9 +23,17 @@ class SquadPlayerAdapter(private val list: List<AllRoundedResponse>) :
         val player = list[position]
 
         holder.binding.playerName.text = player.firstName + " " + player.lastName
-        val playerInfo = player.playerInfo.split("/")
-        holder.binding.battingStyle.text = playerInfo[0]
-        holder.binding.bowlingStyle.text = playerInfo[1]
+
+        player.playerInfo?.let { pInfo ->
+            try {
+                val playerInfo = pInfo.split("/")
+                holder.binding.battingStyle.text = playerInfo[0]
+                holder.binding.bowlingStyle.text = playerInfo[1]
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
 
         Glide.with(holder.binding.root.context).load(player.userPicture).placeholder(R.drawable.img_placeholder_portrait)
             .error(R.drawable.img_placeholder_portrait).into(holder.binding.playerImage)

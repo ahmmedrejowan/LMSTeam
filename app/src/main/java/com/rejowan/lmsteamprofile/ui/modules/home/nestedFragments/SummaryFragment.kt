@@ -120,24 +120,24 @@ class SummaryFragment : Fragment() {
         binding.summaryLayout.nationalRank.text = rankings[0].countryRank.toString()
         binding.summaryLayout.worldRank.text = rankings[0].worldRank.toString()
 
-        val form = rankings[0].form
-        val formArray = form.split(" ")
-        val spannableString = SpannableStringBuilder()
-        for (formItem in formArray) {
-            val start = spannableString.length
-            spannableString.append(formItem)
+        rankings[0].form?.let { f ->
+            val formArray = f.split(" ")
+            val spannableString = SpannableStringBuilder()
+            for (formItem in formArray) {
+                val start = spannableString.length
+                spannableString.append(formItem)
 
-            val color = if (formItem == "W") Color.GREEN else Color.RED
+                val color = if (formItem == "W") Color.GREEN else Color.RED
 
-            spannableString.setSpan(
-                ForegroundColorSpan(color), start, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+                spannableString.setSpan(
+                    ForegroundColorSpan(color), start, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
 
-            spannableString.append(" ")
+                spannableString.append(" ")
 
+            }
+            binding.summaryLayout.form.text = spannableString
         }
-        binding.summaryLayout.form.text = spannableString
-
 
     }
 
