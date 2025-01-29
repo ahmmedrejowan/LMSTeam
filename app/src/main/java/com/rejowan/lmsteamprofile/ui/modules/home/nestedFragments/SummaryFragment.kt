@@ -88,11 +88,11 @@ class SummaryFragment : Fragment() {
 
     private fun clickListeners() {
 
-        binding.seeFullBowler.setOnClickListener {
+        binding.squadLayout.seeFullBowler.setOnClickListener {
             switchToPage(2)
         }
 
-        binding.seeFullBatsman.setOnClickListener {
+        binding.squadLayout.seeFullBatsman.setOnClickListener {
             switchToPage(1)
         }
 
@@ -104,21 +104,21 @@ class SummaryFragment : Fragment() {
     }
 
     private fun setupSummaryStats(summaryStats: List<SummaryStats>) {
-        binding.matches.text = summaryStats[0].gamesPlayed.toString()
+        binding.summaryLayout.matches.text = summaryStats[0].gamesPlayed.toString()
 
         val winRatio = summaryStats[0].winRatio.toString()
         val winRatioArray = winRatio.split(".")
-        binding.winRatio.text = winRatioArray[0]
-        binding.winRatioPercent.text = ".${winRatioArray[1]} %"
+        binding.summaryLayout.winRatio.text = winRatioArray[0]
+        binding.summaryLayout.winRatioPercent.text = ".${winRatioArray[1]} %"
 
-        binding.wins.text = String.format(summaryStats[0].wins.toString())
-        binding.loses.text = summaryStats[0].loses.toString()
+        binding.summaryLayout.wins.text = String.format(summaryStats[0].wins.toString())
+        binding.summaryLayout.loses.text = summaryStats[0].loses.toString()
     }
 
     private fun setupRanking(rankings: List<Rankings>) {
-        binding.cityRank.text = rankings[0].regionalRank.toString()
-        binding.nationalRank.text = rankings[0].countryRank.toString()
-        binding.worldRank.text = rankings[0].worldRank.toString()
+        binding.summaryLayout.cityRank.text = rankings[0].regionalRank.toString()
+        binding.summaryLayout.nationalRank.text = rankings[0].countryRank.toString()
+        binding.summaryLayout.worldRank.text = rankings[0].worldRank.toString()
 
         val form = rankings[0].form
         val formArray = form.split(" ")
@@ -136,7 +136,7 @@ class SummaryFragment : Fragment() {
             spannableString.append(" ")
 
         }
-        binding.form.text = spannableString
+        binding.summaryLayout.form.text = spannableString
 
 
     }
@@ -144,35 +144,40 @@ class SummaryFragment : Fragment() {
 
     private fun setupTopBatsman(topBatsmen: List<Player>) {
         val adapter = TopPlayerAdapter(topBatsmen.take(6))
-        binding.recyclerViewTopBatsmen.adapter = adapter
-        binding.recyclerViewTopBatsmen.layoutManager = LinearLayoutManager(
+        binding.squadLayout.recyclerViewTopBatsmen.adapter = adapter
+        binding.squadLayout.recyclerViewTopBatsmen.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
+        binding.squadLayout.recyclerViewTopBatsmen.setHasFixedSize(true)
+        binding.squadLayout.recyclerViewTopBatsmen.stopNestedScroll()
     }
 
     private fun setupTopBowler(topBowlers: List<Player>) {
         val adapter = TopPlayerAdapter(topBowlers.take(6))
-        binding.recyclerViewTopBowlers.adapter = adapter
-        binding.recyclerViewTopBowlers.layoutManager = LinearLayoutManager(
+        binding.squadLayout.recyclerViewTopBowlers.adapter = adapter
+        binding.squadLayout.recyclerViewTopBowlers.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
+        binding.squadLayout.recyclerViewTopBowlers.setHasFixedSize(true)
+        binding.squadLayout.recyclerViewTopBowlers.stopNestedScroll()
     }
 
     private fun setupTopAllRounder(topAllRounders: List<Player>) {
         val adapter = TopPlayerAdapter(topAllRounders.take(6))
-        binding.recyclerViewTopAllRounders.adapter = adapter
-        binding.recyclerViewTopAllRounders.layoutManager = LinearLayoutManager(
+        binding.squadLayout.recyclerViewTopAllRounders.adapter = adapter
+        binding.squadLayout.recyclerViewTopAllRounders.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
+        binding.squadLayout.recyclerViewTopAllRounders.setHasFixedSize(true)
+        binding.squadLayout.recyclerViewTopAllRounders.stopNestedScroll()
     }
 
 
     private fun setupSquad(allRounderList: MutableList<AllRoundedResponse>) {
         val adapter = SquadPlayerAdapter(allRounderList.take(3))
         binding.recyclerViewSquad.adapter = adapter
-        binding.recyclerViewSquad.layoutManager = LinearLayoutManager(
-            requireContext(), LinearLayoutManager.HORIZONTAL, false
-        )
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewSquad.layoutManager = layoutManager
 
         binding.scrollSquad.setOnClickListener {
             val last = adapter.itemCount - 1
@@ -184,17 +189,17 @@ class SummaryFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition()
                 val totalItemCount = adapter.itemCount
 
                 if (lastVisiblePosition == totalItemCount - 1) {
-                    binding.scrollSquad.visibility = View.GONE
+                    binding.scrollSquad.visibility = View.INVISIBLE
                 } else {
                     binding.scrollSquad.visibility = View.VISIBLE
                 }
             }
         })
+
 
     }
 
@@ -209,7 +214,8 @@ class SummaryFragment : Fragment() {
         binding.recyclerViewRecentResults.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
-
+        binding.recyclerViewRecentResults.setHasFixedSize(true)
+        binding.recyclerViewRecentResults.stopNestedScroll()
     }
 
     private fun setupUpcomingFixtures(upcomingFixtures: List<UpcomingFixture>) {
@@ -218,6 +224,8 @@ class SummaryFragment : Fragment() {
         binding.recyclerViewUpcomingFixtures.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
+        binding.recyclerViewUpcomingFixtures.setHasFixedSize(true)
+        binding.recyclerViewUpcomingFixtures.stopNestedScroll()
     }
 
     private fun setupVideos(videos: List<Video>) {
@@ -226,6 +234,8 @@ class SummaryFragment : Fragment() {
         binding.recyclerViewVideos.layoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
+        binding.recyclerViewVideos.setHasFixedSize(true)
+        binding.recyclerViewVideos.stopNestedScroll()
 
     }
 

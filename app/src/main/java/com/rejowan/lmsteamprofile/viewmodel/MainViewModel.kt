@@ -28,9 +28,21 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
         }
     }
 
+    fun loadMoreBatters() {
+        viewModelScope.launch {
+            repository.loadMoreBatters()
+        }
+    }
+
     fun getBowlers() {
         viewModelScope.launch(SupervisorJob() + Dispatchers.IO) {
             repository.getBowlers()
+        }
+    }
+
+    fun loadMoreBowlers() {
+        viewModelScope.launch {
+            repository.loadMoreBowlers()
         }
     }
 

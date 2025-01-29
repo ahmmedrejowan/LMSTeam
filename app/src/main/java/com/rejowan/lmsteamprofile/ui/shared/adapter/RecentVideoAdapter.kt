@@ -12,14 +12,12 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class RecentVideoAdapter(private val list: List<Video>) :
-    RecyclerView.Adapter<RecentVideoAdapter.VideoViewHolder>() {
+class RecentVideoAdapter(private val list: List<Video>) : RecyclerView.Adapter<RecentVideoAdapter.VideoViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): RecentVideoAdapter.VideoViewHolder {
-        val binding =
-            ItemSingleVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSingleVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VideoViewHolder(binding)
     }
 
@@ -32,8 +30,7 @@ class RecentVideoAdapter(private val list: List<Video>) :
         val youtubeId = result.youtube.split("/").last()
         val youtubeThumbnail = "https://img.youtube.com/vi/$youtubeId/0.jpg"
 
-        Glide.with(holder.binding.root.context).load(youtubeThumbnail)
-            .placeholder(R.drawable.img_placeholder_portrait)
+        Glide.with(holder.binding.root.context).load(youtubeThumbnail).placeholder(R.drawable.img_placeholder_portrait)
             .error(R.drawable.img_placeholder_portrait).into(holder.binding.newsImage)
 
         try {
@@ -68,7 +65,6 @@ class RecentVideoAdapter(private val list: List<Video>) :
     }
 
 
-    inner class VideoViewHolder(val binding: ItemSingleVideoBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class VideoViewHolder(val binding: ItemSingleVideoBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

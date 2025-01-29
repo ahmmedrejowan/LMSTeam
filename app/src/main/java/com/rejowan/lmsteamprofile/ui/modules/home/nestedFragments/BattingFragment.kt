@@ -45,11 +45,20 @@ class BattingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Toast.makeText(activity, "Loading Data", Toast.LENGTH_SHORT).show()
 
         setupAdapter()
 
         setupFilters()
+
+        setupClicks()
+
+    }
+
+    private fun setupClicks() {
+
+        binding.loadMore.setOnClickListener {
+            mainViewModel.loadMoreBatters()
+        }
 
     }
 

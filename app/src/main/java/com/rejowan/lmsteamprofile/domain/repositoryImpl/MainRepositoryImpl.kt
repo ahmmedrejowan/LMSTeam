@@ -42,6 +42,96 @@ class MainRepositoryImpl : MainRepository {
     override val allRounderList: LiveData<MutableList<AllRoundedResponse>>
         get() = _allRounderList
 
+    private var fullBatterList: List<BatterResponse> = emptyList()
+    private var batterPageIndex = 0
+
+    private var fullBowlerList: List<BowlerResponse> = emptyList()
+    private var bowlerPageIndex = 0
+
+    private val pageSize = 10
+
+
+    override suspend fun getBatters() {
+        try {
+            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getBatterList()?.await()
+            response?.let {
+                withContext(Dispatchers.Main) {
+                    fullBatterList = it.toList()
+                    batterPageIndex = 0
+                    _batterList.postValue(getNextBatchOfBatters())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepositoryImpl", "getBatters: ${e.message}", e)
+        }
+    }
+
+
+   override suspend fun loadMoreBatters() {
+        withContext(Dispatchers.Main) {
+            _batterList.value = getNextBatchOfBatters()
+        }
+    }
+
+    private fun getNextBatchOfBatters(): MutableList<BatterResponse> {
+        if (batterPageIndex >= fullBatterList.size) return _batterList.value ?: mutableListOf()
+
+        val nextBatch = fullBatterList.subList(
+            batterPageIndex,
+            minOf(batterPageIndex + pageSize, fullBatterList.size)
+        ).toMutableList()
+
+        batterPageIndex += pageSize
+        return (_batterList.value ?: mutableListOf()).apply { addAll(nextBatch) }
+    }
+
+
+    override suspend fun getBowlers() {
+        try {
+            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getBowlerList()?.await()
+            response?.let {
+                withContext(Dispatchers.Main) {
+                    fullBowlerList = it.toList()
+                    bowlerPageIndex = 0
+                    _bowlerList.postValue(getNextBatchOfBowlers())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepositoryImpl", "getBowlers: ${e.message}", e)
+        }
+    }
+
+    override suspend fun loadMoreBowlers() {
+        withContext(Dispatchers.Main) {
+            _bowlerList.value = getNextBatchOfBowlers()
+        }
+    }
+
+    private fun getNextBatchOfBowlers(): MutableList<BowlerResponse> {
+        if (bowlerPageIndex >= fullBowlerList.size) return _bowlerList.value ?: mutableListOf()
+
+        val nextBatch = fullBowlerList.subList(
+            bowlerPageIndex,
+            minOf(bowlerPageIndex + pageSize, fullBowlerList.size)
+        ).toMutableList()
+
+        bowlerPageIndex += pageSize
+        return (_bowlerList.value ?: mutableListOf()).apply { addAll(nextBatch) }
+    }
+
+    override suspend fun getAllRounders() {
+        try {
+            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getAllRounderList()?.await()
+            response?.let {
+                withContext(Dispatchers.Main) {
+                    _allRounderList.postValue(it.toMutableList())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepositoryImpl", "getAllRounders: ${e.message}", e)
+        }
+    }
+
 
     override suspend fun getSummary() {
         try {
@@ -132,47 +222,5 @@ class MainRepositoryImpl : MainRepository {
         }
 
     }
-
-    override suspend fun getBatters() {
-        try {
-            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getBatterList()?.await()
-            response?.let {
-                withContext(Dispatchers.Main) {
-                    _batterList.postValue(it.toMutableList())
-                }
-            }
-        } catch (e: Exception) {
-            Log.e("MainRepositoryImpl", "getBatters: ${e.message}", e)
-        }
-
-
-    }
-
-    override suspend fun getBowlers() {
-        try {
-            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getBowlerList()?.await()
-            response?.let {
-                withContext(Dispatchers.Main) {
-                    _bowlerList.postValue(it.toMutableList())
-                }
-            }
-        } catch (e: Exception) {
-            Log.e("MainRepositoryImpl", "getBowlers: ${e.message}", e)
-        }
-    }
-
-    override suspend fun getAllRounders() {
-        try {
-            val response = RetrofitClient.getInstance(Config.BASE_URL)?.getAllRounderList()?.await()
-            response?.let {
-                withContext(Dispatchers.Main) {
-                    _allRounderList.postValue(it.toMutableList())
-                }
-            }
-        } catch (e: Exception) {
-            Log.e("MainRepositoryImpl", "getAllRounders: ${e.message}", e)
-        }
-    }
-
 
 }

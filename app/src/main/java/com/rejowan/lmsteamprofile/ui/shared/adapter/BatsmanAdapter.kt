@@ -39,6 +39,7 @@ class BatsmanAdapter(private val list: MutableList<BatterResponse> = mutableList
             holder.binding.linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"))
         }
 
+
     }
 
     fun updateList(newList: List<BatterResponse>) {

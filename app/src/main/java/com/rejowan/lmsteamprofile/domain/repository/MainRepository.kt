@@ -21,9 +21,15 @@ interface MainRepository {
 
     suspend fun getBatters()
 
+    suspend fun loadMoreBatters()
+
     suspend fun getBowlers()
 
+    suspend fun loadMoreBowlers()
+
     suspend fun getAllRounders()
+
+
 
 
 }
