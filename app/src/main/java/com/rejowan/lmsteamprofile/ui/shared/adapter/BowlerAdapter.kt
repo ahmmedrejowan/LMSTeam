@@ -22,7 +22,8 @@ class BowlerAdapter(private val list: MutableList<BowlerResponse> = mutableListO
     override fun onBindViewHolder(holder: BowlerAdapter.BatterViewHolder, position: Int) {
         val item = list[position]
 
-        holder.binding.name.text = item.userName
+        holder.binding.firstName.text = item.firstName
+        holder.binding.lastName.text = item.lastName
         holder.binding.overs.text = item.overs.toString()
         holder.binding.wkts.text = item.wickets.toString()
         holder.binding.avg.text = item.average.toString()

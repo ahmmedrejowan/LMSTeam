@@ -22,7 +22,8 @@ class BatsmanAdapter(private val list: MutableList<BatterResponse> = mutableList
     override fun onBindViewHolder(holder: BatsmanAdapter.BatterViewHolder, position: Int) {
         val item = list[position]
 
-        holder.binding.name.text = item.userName
+        holder.binding.firstName.text = item.firstName
+        holder.binding.lastName.text = item.lastName
         holder.binding.inngs.text = item.innings.toString()
         holder.binding.runs.text = item.runs.toString()
         holder.binding.avg.text = item.average.toString()

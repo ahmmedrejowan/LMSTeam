@@ -88,19 +88,20 @@ class MainViewModelTest : KoinTest {
         val mockAllRounders = mutableListOf(
             AllRoundedResponse(
                 userId = 1,
-                userName = "AllRounder 1",
+                firstName = "First Name",
+                lastName = "Last Name",
                 userPicture = "url1",
                 playerInfo = "Player Info 1",
                 innings = 20,
                 runs = 500,
                 battingAverage = 50.0,
                 strikeRate = 120.0,
-                wickets = 25,
-                bowlingAverage = 20.0,
-                economy = 4.5,
                 worldRank = 1,
                 nationalRank = 1,
-                isFormar = 0
+                isFormar = 0,
+                fifties = 2,
+                hundred = 1,
+                highestScore = 125
             )
         )
         val mockLiveData = MutableLiveData<MutableList<AllRoundedResponse>>().apply {
@@ -127,7 +128,8 @@ class MainViewModelTest : KoinTest {
         val mockData = mutableListOf(
             BatterResponse(
                 userId = 1,
-                userName = "Batter 1",
+                firstName = "First Name",
+                lastName = "Last Name",
                 userPicture = "url1",
                 playerInfo = "Info 1",
                 innings = 25,
@@ -168,7 +170,8 @@ class MainViewModelTest : KoinTest {
         val mockData = mutableListOf(
             BowlerResponse(
                 userId = 1,
-                userName = "Bowler 1",
+                firstName = "First Name",
+                lastName = "Last Name",
                 userPicture = "url1",
                 playerInfo = "Info 1",
                 overs = 50.0,

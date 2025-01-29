@@ -13,24 +13,21 @@ class SquadPlayerAdapter(private val list: List<AllRoundedResponse>) :
 
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): SquadPlayerAdapter.SquadPlayerViewHolder {
-        val binding =
-            ItemSingleSquadBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSingleSquadBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SquadPlayerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SquadPlayerAdapter.SquadPlayerViewHolder, position: Int) {
         val player = list[position]
 
-        holder.binding.playerName.text = player.userName
+        holder.binding.playerName.text = player.firstName + " " + player.lastName
         val playerInfo = player.playerInfo.split("/")
         holder.binding.battingStyle.text = playerInfo[0]
         holder.binding.bowlingStyle.text = playerInfo[1]
 
-        Glide.with(holder.binding.root.context).load(player.userPicture)
-            .placeholder(R.drawable.img_placeholder_portrait)
+        Glide.with(holder.binding.root.context).load(player.userPicture).placeholder(R.drawable.img_placeholder_portrait)
             .error(R.drawable.img_placeholder_portrait).into(holder.binding.playerImage)
     }
 
@@ -39,7 +36,6 @@ class SquadPlayerAdapter(private val list: List<AllRoundedResponse>) :
     }
 
 
-    inner class SquadPlayerViewHolder(val binding: ItemSingleSquadBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class SquadPlayerViewHolder(val binding: ItemSingleSquadBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

@@ -13,19 +13,46 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/name"
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1.5"
-            android:autoSizeMaxTextSize="12sp"
-            android:autoSizeMinTextSize="11sp"
-            android:autoSizeTextType="uniform"
-            android:gravity="center"
-            android:maxLines="2"
-            android:textColor="@color/textColor"
-            android:textSize="12sp" />
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:autoSizeMaxTextSize="12sp"
+                android:autoSizeMinTextSize="11sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/textColor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:autoSizeMaxTextSize="12sp"
+                android:autoSizeMinTextSize="11sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/textColor"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
 
 
         <TextView
@@ -35,10 +62,10 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="#008977"
             android:textSize="12sp" />
 
@@ -51,9 +78,9 @@
             android:layout_weight="1.5"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
-            android:maxLines="1"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="@color/textColor"
             android:textSize="12sp" />
 
@@ -65,10 +92,10 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="#008977"
             android:textSize="12sp" />
 
@@ -80,10 +107,10 @@
             android:layout_gravity="center"
             android:layout_weight="1.5"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="@color/textColor"
             android:textSize="12sp" />
 
@@ -94,11 +121,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="#008977"
             android:textSize="12sp" />
 
@@ -109,11 +136,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="@color/textColor"
             android:textSize="12sp" />
 
@@ -125,10 +152,10 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="12sp"
-            android:maxLines="1"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="#008977"
             android:textSize="12sp" />
 
@@ -138,11 +165,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLines="1"
             android:autoSizeMaxTextSize="12sp"
             android:autoSizeMinTextSize="11sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="@color/textColor"
             android:textSize="12sp" />
 
