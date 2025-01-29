@@ -91,6 +91,8 @@ class Splash : AppCompatActivity() {
             override fun onError(errorCode: Int, errorMessage: String) {
                 runOnUiThread {
                     Toast.makeText(this@Splash, errorMessage, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@Splash, Home::class.java))
+                    finish()
                 }
 
             }
