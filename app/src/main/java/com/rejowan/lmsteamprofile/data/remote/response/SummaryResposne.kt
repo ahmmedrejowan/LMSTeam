@@ -41,12 +41,15 @@ data class Rankings(
 
 data class Player(
     @SerializedName("UserId") val userId: Int,
-    @SerializedName("UserName") val userName: String,
+    @SerializedName("FirstName") val firstName: String,
+    @SerializedName("LastName") val lastName: String,
     @SerializedName("Nationality") val nationality: Int,
     @SerializedName("UserPicture") val userPicture: String,
     @SerializedName("WorldRank") val worldRank: Int,
     @SerializedName("NationalRank") val nationalRank: Int
 )
+
+
 
 data class Awards(
     @SerializedName("Champion") val champion: Int,

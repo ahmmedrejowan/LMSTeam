@@ -1,5 +1,6 @@
 package com.rejowan.lmsteamprofile.ui.shared.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -48,11 +49,15 @@ class TopPlayerAdapter(private val list: List<Player>) : RecyclerView.Adapter<Re
 
     inner class TopPlayerViewHolder(private val binding: ItemSingleTopPlayerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(player: Player) {
-            val playerNameArray = player.userName.split(" ")
-            val lastName = playerNameArray.last()
-            val rest = playerNameArray.dropLast(1).joinToString(" ")
-            binding.lastName.text = lastName
-            binding.firstName.text = rest
+           try {
+               val playerNameArray = player.userName.split(" ")
+               val lastName = playerNameArray.last()
+               val rest = playerNameArray.dropLast(1).joinToString(" ")
+               binding.lastName.text = lastName
+               binding.firstName.text = rest
+           } catch (e: Exception) {
+               Log.e("TopPlayerAdapter", "Error: ${e.message}")
+           }
 
             binding.worldRank.text = player.worldRank.toString()
             binding.nationalRank.text = player.nationalRank.toString()

@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class BatterResponse(
     @SerializedName("UserId") val userId: Int,
 
-    @SerializedName("UserName") val userName: String,
+    @SerializedName("FirstName") val firstName: String,
+
+    @SerializedName("LastName") val lastName: String,
 
     @SerializedName("UserPicture") val userPicture: String,
 
